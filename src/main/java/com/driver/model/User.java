@@ -15,7 +15,7 @@ public class User {
 
     private String userName;
     private String password;
-    private String originalIp;
+    private String originalCountry;
     private String maskedIp;
     private Boolean connected;
 
@@ -52,12 +52,12 @@ public class User {
         this.password = password;
     }
 
-    public String getOriginalIp() {
-        return originalIp;
+    public String getOriginalCountry() {
+        return originalCountry;
     }
 
-    public void setOriginalIp(String originalIp) {
-        this.originalIp = originalIp;
+    public void setOriginalCountry(String originalCountry) {
+        this.originalCountry = originalCountry;
     }
 
     public String getMaskedIp() {
@@ -68,7 +68,7 @@ public class User {
         this.maskedIp = maskedIp;
     }
 
-    public Boolean isConnected() {
+    public Boolean getConnected() {
         return connected;
     }
 
