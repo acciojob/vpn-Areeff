@@ -47,11 +47,10 @@ public class UserServiceImpl implements UserService {
         user.setOriginalCountry(country);
         user.setPassword(password);
         user.setUsername(username);
-        user.setOriginalIp(country.getCode());
         user.setConnected(false);
         user.setMaskedIp(null);
+        user.setOriginalIp(country.getCode()+"."+userRepository3.save(user).getId());
         country.setUser(user);
-        userRepository3.save(user);
         return user;
     }
 
