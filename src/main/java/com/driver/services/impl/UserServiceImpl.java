@@ -1,5 +1,7 @@
 package com.driver.services.impl;
 
+import com.driver.model.Country;
+import com.driver.model.CountryName;
 import com.driver.model.User;
 import com.driver.repository.CountryRepository;
 import com.driver.repository.ServiceProviderRepository;
@@ -20,7 +22,37 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User register(String username, String password, String countryName) throws Exception{
-            return null;
+        //create a user of given country. The originalIp of the user should be "countryCode.userId" and return the user.
+        // Note that right now user is not connected and thus connected would be false and maskedIp would be null
+        //Note that the userId is created automatically by the repository layer
+        countryName=countryName.toUpperCase();
+        User user=new User();
+        CountryName UserOfgivenCountry=null;
+        if(countryName.equals("IND")){
+            UserOfgivenCountry=CountryName.IND;
+        }
+        else if(countryName.equals("USA")){
+            UserOfgivenCountry=CountryName.USA;
+        }
+        else if(countryName.equals("AUS")){
+            UserOfgivenCountry=CountryName.AUS;
+        }
+        else if(countryName.equals("CHI")){
+            UserOfgivenCountry=CountryName.CHI;
+        }
+        else if(countryName.equals("JPN")) {
+            UserOfgivenCountry = CountryName.JPN;
+        }
+        Country country=countryRepository3.findByCountryName(UserOfgivenCountry);
+        user.setOriginalCountry(country);
+        user.setPassword(password);
+        user.setUsername(username);
+        user.setOriginalIp(country.getCode());
+        user.setConnected(false);
+        user.setMaskedIp(null);
+        country.setUser(user);
+        userRepository3.save(user);
+        return user;
     }
 
     @Override
