@@ -16,6 +16,14 @@ public class Admin {
     @OneToMany(mappedBy = "admin",cascade = CascadeType.ALL)
     private  List<ServiceProvider> serviceProviders=new ArrayList<>();
 
+    public Admin(String userName, String password) {
+        this.userName = userName;
+        this.password = password;
+    }
+
+    public Admin() {
+    }
+
     public Integer getId() {
         return id;
     }
