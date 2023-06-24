@@ -2,6 +2,7 @@ package com.driver.services.impl;
 
 import com.driver.model.Country;
 import com.driver.model.CountryName;
+import com.driver.model.ServiceProvider;
 import com.driver.model.User;
 import com.driver.repository.CountryRepository;
 import com.driver.repository.ServiceProviderRepository;
@@ -56,14 +57,22 @@ public class UserServiceImpl implements UserService {
         user.setPassword(password);
         user.setUsername(username);
         user.setConnected(false);
-        user.setMaskedIp(null);
+        //user.setMaskedIp(null);
         user.setOriginalIp(country.getCode()+"."+userRepository3.save(user).getId());
         country.setUser(user);
+        userRepository3.save(user);
         return user;
     }
 
     @Override
     public User subscribe(Integer userId, Integer serviceProviderId) {
-              return null;
+        User user=userRepository3.findById(userId).get();
+        ServiceProvider serviceProvider=serviceProviderRepository3.findById(serviceProviderId).get();
+        user.getServiceProviderList().add(serviceProvider);
+        serviceProvider.getUsers().add(user);
+        serviceProviderRepository3.save(serviceProvider);
+        return user;
+
+
     }
 }
