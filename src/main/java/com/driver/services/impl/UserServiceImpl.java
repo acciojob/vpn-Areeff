@@ -44,7 +44,7 @@ public class UserServiceImpl implements UserService {
             UserOfgivenCountry = CountryName.JPN;
         }
         else{
-            throw new Exception("Country Not Found");
+            throw new Exception("Country not found");
         }
         Country country=new Country();
         country.setCountryName(UserOfgivenCountry);
