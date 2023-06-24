@@ -30,23 +30,23 @@ public class UserServiceImpl implements UserService {
         User user=new User();
        // CountryName UserOfgivenCountry=null;
         Country country=new Country();
-        if(countryName.equals("IND")){
+        if(countryName.equalsIgnoreCase("IND")){
            country.setCountryName(CountryName.IND);
            country.setCode(CountryName.IND.toCode());
         }
-        else if(countryName.equals("USA")){
+        else if(countryName.equalsIgnoreCase("USA")){
             country.setCountryName(CountryName.USA);
             country.setCode(CountryName.USA.toCode());
         }
-        else if(countryName.equals("AUS")){
+        else if(countryName.equalsIgnoreCase("AUS")){
             country.setCountryName(CountryName.AUS);
             country.setCode(CountryName.AUS.toCode());
         }
-        else if(countryName.equals("CHI")){
+        else if(countryName.equalsIgnoreCase("CHI")){
             country.setCountryName(CountryName.CHI);
             country.setCode(CountryName.CHI.toCode());
         }
-        else if(countryName.equals("JPN")) {
+        else if(countryName.equalsIgnoreCase("JPN")) {
             country.setCountryName(CountryName.JPN);
             country.setCode(CountryName.JPN.toCode());
         }
