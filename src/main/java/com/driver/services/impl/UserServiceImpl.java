@@ -27,28 +27,31 @@ public class UserServiceImpl implements UserService {
         //Note that the userId is created automatically by the repository layer
         countryName=countryName.toUpperCase();
         User user=new User();
-        CountryName UserOfgivenCountry=null;
+       // CountryName UserOfgivenCountry=null;
+        Country country=new Country();
         if(countryName.equals("IND")){
-            UserOfgivenCountry=CountryName.IND;
+           country.setCountryName(CountryName.IND);
+           country.setCode(CountryName.IND.toCode());
         }
         else if(countryName.equals("USA")){
-            UserOfgivenCountry=CountryName.USA;
+            country.setCountryName(CountryName.USA);
+            country.setCode(CountryName.USA.toCode());
         }
         else if(countryName.equals("AUS")){
-            UserOfgivenCountry=CountryName.AUS;
+            country.setCountryName(CountryName.AUS);
+            country.setCode(CountryName.AUS.toCode());
         }
         else if(countryName.equals("CHI")){
-            UserOfgivenCountry=CountryName.CHI;
+            country.setCountryName(CountryName.CHI);
+            country.setCode(CountryName.CHI.toCode());
         }
         else if(countryName.equals("JPN")) {
-            UserOfgivenCountry = CountryName.JPN;
+            country.setCountryName(CountryName.JPN);
+            country.setCode(CountryName.JPN.toCode());
         }
         else{
             throw new Exception("Country not found");
         }
-        Country country=new Country();
-        country.setCountryName(UserOfgivenCountry);
-        country.setCode(UserOfgivenCountry.toCode());
         user.setOriginalCountry(country);
         user.setPassword(password);
         user.setUsername(username);
