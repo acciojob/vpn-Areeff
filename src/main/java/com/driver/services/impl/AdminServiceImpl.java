@@ -63,18 +63,23 @@ public class AdminServiceImpl implements AdminService {
         countryName=countryName.toUpperCase();
         if(countryName.equals("IND")){
             country.setCountryName(CountryName.IND);
+            country.setCode(CountryName.IND.toCode());
         }
         else if(countryName.equals("USA")){
             country.setCountryName(CountryName.USA);
+            country.setCode(CountryName.USA.toCode());
         }
         else if(countryName.equals("AUS")){
             country.setCountryName(CountryName.AUS);
+            country.setCode(CountryName.AUS.toCode());
         }
         else if(countryName.equals("CHI")){
             country.setCountryName(CountryName.CHI);
+            country.setCode(CountryName.CHI.toCode());
         }
         else if(countryName.equals("JPN")){
             country.setCountryName(CountryName.JPN);
+            country.setCode(CountryName.JPN.toCode());
         }
         else{
             throw new Exception("Country not found");
