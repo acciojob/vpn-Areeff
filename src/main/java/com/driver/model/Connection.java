@@ -10,7 +10,7 @@ public class Connection {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @OneToMany
+    @ManyToOne
     @JoinColumn
     private User user;
 

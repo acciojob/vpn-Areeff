@@ -11,6 +11,8 @@ import com.driver.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -26,41 +28,43 @@ public class UserServiceImpl implements UserService {
         //create a user of given country. The originalIp of the user should be "countryCode.userId" and return the user.
         // Note that right now user is not connected and thus connected would be false and maskedIp would be null
         //Note that the userId is created automatically by the repository layer
-        countryName=countryName.toUpperCase();
+        String newCountryName=countryName.toUpperCase();
         User user=new User();
-       // CountryName UserOfgivenCountry=null;
         Country country=new Country();
-        if(countryName.equals("IND")){
-           country.setCountryName(CountryName.IND);
-           country.setCode(CountryName.IND.toCode());
+        if(newCountryName.equals("IND")){
+            country.setCountryName(CountryName.IND);
+            country.setCode(CountryName.IND.toCode());
         }
-        else if(countryName.equals("USA")){
+        else if(newCountryName.equals("USA")){
             country.setCountryName(CountryName.USA);
             country.setCode(CountryName.USA.toCode());
         }
-        else if(countryName.equals("AUS")){
+        else if(newCountryName.equals("AUS")){
             country.setCountryName(CountryName.AUS);
             country.setCode(CountryName.AUS.toCode());
         }
-        else if(countryName.equals("CHI")){
+        else if(newCountryName.equals("CHI")){
             country.setCountryName(CountryName.CHI);
             country.setCode(CountryName.CHI.toCode());
         }
-        else if(countryName.equals("JPN")) {
+        else if(newCountryName.equals("JPN")){
             country.setCountryName(CountryName.JPN);
             country.setCode(CountryName.JPN.toCode());
         }
         else{
             throw new Exception("Country not found");
         }
+        country.setUser(user);
         user.setOriginalCountry(country);
         user.setPassword(password);
         user.setUsername(username);
         user.setConnected(false);
+        user.setConnectionList(new ArrayList<>());
+        user.setServiceProviderList(new ArrayList<>());
         //user.setMaskedIp(null);
-        user.setOriginalIp(country.getCode()+"."+userRepository3.save(user).getId());
-        country.setUser(user);
-        userRepository3.save(user);
+        user=userRepository3.save(user);
+        user.setOriginalIp(new String(country.getCode()+"."+user.getId()));
+        user=userRepository3.save(user);
         return user;
     }
 

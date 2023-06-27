@@ -60,24 +60,24 @@ public class AdminServiceImpl implements AdminService {
 
         ServiceProvider serviceProvider=serviceProviderRepository1.findById(serviceProviderId).get();
         Country country=new Country();
-        countryName=countryName.toUpperCase();
-        if(countryName.equals("IND")){
+        String newCountryName=countryName.toUpperCase();
+        if(newCountryName.equals("IND")){
             country.setCountryName(CountryName.IND);
             country.setCode(CountryName.IND.toCode());
         }
-        else if(countryName.equals("USA")){
+        else if(newCountryName.equals("USA")){
             country.setCountryName(CountryName.USA);
             country.setCode(CountryName.USA.toCode());
         }
-        else if(countryName.equals("AUS")){
+        else if(newCountryName.equals("AUS")){
             country.setCountryName(CountryName.AUS);
             country.setCode(CountryName.AUS.toCode());
         }
-        else if(countryName.equals("CHI")){
+        else if(newCountryName.equals("CHI")){
             country.setCountryName(CountryName.CHI);
             country.setCode(CountryName.CHI.toCode());
         }
-        else if(countryName.equals("JPN")){
+        else if(newCountryName.equals("JPN")){
             country.setCountryName(CountryName.JPN);
             country.setCode(CountryName.JPN.toCode());
         }
