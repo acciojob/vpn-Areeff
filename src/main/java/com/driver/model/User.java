@@ -25,6 +25,9 @@ public class User {
         this.password = password;
         this.originalCountry = originalCountry;
     }
+    public User(){
+
+    }
 
     @ManyToMany
     @JoinColumn
