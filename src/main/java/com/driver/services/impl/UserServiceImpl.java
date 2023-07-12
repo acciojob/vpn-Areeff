@@ -64,8 +64,8 @@ public class UserServiceImpl implements UserService {
         user.setMaskedIp(null);
         String Ip=country.getCode()+"."+userRepository3.save(user).getId();
         user.setOriginalIp(Ip);
-        userRepository3.save(user);
-        return user;
+        User user1=userRepository3.save(user);
+        return user1;
     }
 
     @Override
