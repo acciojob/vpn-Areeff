@@ -58,10 +58,11 @@ public class UserServiceImpl implements UserService {
             user.setOriginalCountry(country);
             user.setConnected(false);
             user.setMaskedIp(null);
-            String Ip=country.getCode()+"."+userRepository3.save(user).getId();
-            user.setOriginalIp(Ip);
-            userRepository3.save(user);
-            return user;
+            User user1=userRepository3.save(user);
+            String Ip=country.getCode()+"."+user1.getId();
+            user1.setOriginalIp(Ip);
+            user1=userRepository3.save(user);
+            return user1;
         }
         else{
             throw new Exception("Country not found");
