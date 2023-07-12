@@ -29,7 +29,7 @@ public class AdminServiceImpl implements AdminService {
         Admin admin=new Admin();
         admin.setUsername(username);
         admin.setPassword(password);
-        admin.setServiceProviders(new ArrayList<>());
+        //admin.setServiceProviders(new ArrayList<>());
         adminRepository1.save(admin);
         return admin;
     }
@@ -39,9 +39,9 @@ public class AdminServiceImpl implements AdminService {
         Admin admin=adminRepository1.findById(adminId).get();
         ServiceProvider serviceProvider=new ServiceProvider();
         serviceProvider.setName(providerName);
-        serviceProvider.setConnectionList(new ArrayList<>());
-        serviceProvider.setCountryList(new ArrayList<>());
-        serviceProvider.setUsers(new ArrayList<>());
+        //serviceProvider.setConnectionList(new ArrayList<>());
+       // serviceProvider.setCountryList(new ArrayList<>());
+        //serviceProvider.setUsers(new ArrayList<>());
         serviceProvider.setAdmin(admin);
         admin.getServiceProviders().add(serviceProvider);
         adminRepository1.save(admin);
@@ -85,7 +85,7 @@ public class AdminServiceImpl implements AdminService {
             throw new Exception("Country not found");
         }
         country.setServiceProvider(serviceProvider);
-        country.setUser(null);
+        //country.setUser(null);
         serviceProvider.getCountryList().add(country);
         serviceProviderRepository1.save(serviceProvider);
         return serviceProvider;

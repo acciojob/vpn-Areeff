@@ -18,6 +18,10 @@ public class Connection {
     @JoinColumn
     private ServiceProvider serviceProvider;
 
+    public Connection(){
+
+    }
+
     public Integer getId() {
         return id;
     }

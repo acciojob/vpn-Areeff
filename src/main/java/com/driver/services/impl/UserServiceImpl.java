@@ -59,12 +59,12 @@ public class UserServiceImpl implements UserService {
         user.setPassword(password);
         user.setUsername(username);
         user.setConnected(false);
-        user.setConnectionList(new ArrayList<>());
-        user.setServiceProviderList(new ArrayList<>());
-        //user.setMaskedIp(null);
-        user=userRepository3.save(user);
-        user.setOriginalIp(new String(country.getCode()+"."+user.getId()));
-        user=userRepository3.save(user);
+        //user.setConnectionList(new ArrayList<>());
+        //user.setServiceProviderList(new ArrayList<>());
+        user.setMaskedIp(null);
+        String Ip=country.getCode()+"."+userRepository3.save(user).getId();
+        user.setOriginalIp(Ip);
+        userRepository3.save(user);
         return user;
     }
 
