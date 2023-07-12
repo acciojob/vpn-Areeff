@@ -19,6 +19,13 @@ public class User {
     private String maskedIp;
     private Boolean connected;
 
+
+    public User(String username, String password, Country originalCountry) {
+        this.username = username;
+        this.password = password;
+        this.originalCountry = originalCountry;
+    }
+
     @ManyToMany
     @JoinColumn
     private  List<ServiceProvider>serviceProviderList=new ArrayList<>();
