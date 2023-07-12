@@ -28,45 +28,45 @@ public class UserServiceImpl implements UserService {
         //create a user of given country. The originalIp of the user should be "countryCode.userId" and return the user.
         // Note that right now user is not connected and thus connected would be false and maskedIp would be null
         //Note that the userId is created automatically by the repository layer
-        String newCountryName=countryName.toUpperCase();
-        User user=new User();
-        Country country=new Country();
-        if(newCountryName.equals("IND")){
-            country.setCountryName(CountryName.IND);
-            country.setCode(CountryName.IND.toCode());
-        }
-        else if(newCountryName.equals("USA")){
-            country.setCountryName(CountryName.USA);
-            country.setCode(CountryName.USA.toCode());
-        }
-        else if(newCountryName.equals("AUS")){
-            country.setCountryName(CountryName.AUS);
-            country.setCode(CountryName.AUS.toCode());
-        }
-        else if(newCountryName.equals("CHI")){
-            country.setCountryName(CountryName.CHI);
-            country.setCode(CountryName.CHI.toCode());
-        }
-        else if(newCountryName.equals("JPN")){
-            country.setCountryName(CountryName.JPN);
-            country.setCode(CountryName.JPN.toCode());
+        if(countryName.equalsIgnoreCase("ind")||countryName.equalsIgnoreCase("aus")||countryName.equalsIgnoreCase("usa")||countryName.equalsIgnoreCase("jpn")||countryName.equalsIgnoreCase("chi")){
+            User user=new User();
+            user.setPassword(password);
+            user.setUsername(username);
+
+            Country country=new Country();
+
+            if(countryName.equalsIgnoreCase("ind")){
+                country.setCountryName(CountryName.IND);
+                country.setCode(CountryName.IND.toCode());
+            }
+            if(countryName.equalsIgnoreCase("usa")){
+                country.setCountryName(CountryName.USA);
+                country.setCode(CountryName.USA.toCode());
+            }
+            if(countryName.equalsIgnoreCase("aus")){
+                country.setCountryName(CountryName.AUS);
+                country.setCode(CountryName.AUS.toCode());
+            }
+            if(countryName.equalsIgnoreCase("chi")){
+                country.setCountryName(CountryName.CHI);
+                country.setCode(CountryName.CHI.toCode());
+            }
+            if(countryName.equalsIgnoreCase("jpn")){
+                country.setCountryName(CountryName.JPN);
+                country.setCode(CountryName.JPN.toCode());
+            }
+            country.setUser(user);
+            user.setOriginalCountry(country);
+            user.setConnected(false);
+            user.setMaskedIp(null);
+            String Ip=country.getCode()+"."+userRepository3.save(user).getId();
+            user.setOriginalIp(Ip);
+            userRepository3.save(user);
+            return user;
         }
         else{
             throw new Exception("Country not found");
         }
-        country.setUser(user);
-        user.setOriginalCountry(country);
-        user.setPassword(password);
-        user.setUsername(username);
-        user.setConnected(false);
-        //user.setConnectionList(new ArrayList<>());
-        //user.setServiceProviderList(new ArrayList<>());
-        user.setMaskedIp(null);
-        User user1=userRepository3.save(user);
-        String Ip=country.getCode()+"."+user1.getId();
-        user.setOriginalIp(Ip);
-        user1=userRepository3.save(user);
-        return user1;
     }
 
     @Override
