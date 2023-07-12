@@ -27,46 +27,47 @@ public class UserServiceImpl implements UserService {
         //create a user of given country. The originalIp of the user should be "countryCode.userId" and return the user.
         // Note that right now user is not connected and thus connected would be false and maskedIp would be null
         //Note that the userId is created automatically by the repository layer
-        if(countryName.equalsIgnoreCase("ind")||countryName.equalsIgnoreCase("aus")||countryName.equalsIgnoreCase("usa")||countryName.equalsIgnoreCase("jpn")||countryName.equalsIgnoreCase("chi")){
-            User user=new User();
+        if(countryName.equalsIgnoreCase("ind") || countryName.equalsIgnoreCase("usa") || countryName.equalsIgnoreCase("aus")||countryName.equalsIgnoreCase("jpn")||countryName.equalsIgnoreCase("chi")) {
+
+            User user = new User();
             user.setPassword(password);
             user.setUsername(username);
 
-            Country country=new Country();
+            Country country = new Country();
 
-            if(countryName.equalsIgnoreCase("ind")){
+            if (countryName.equalsIgnoreCase("ind")) {
                 country.setCountryName(CountryName.IND);
                 country.setCode(CountryName.IND.toCode());
             }
-            if(countryName.equalsIgnoreCase("usa")){
+            if (countryName.equalsIgnoreCase("usa")) {
                 country.setCountryName(CountryName.USA);
                 country.setCode(CountryName.USA.toCode());
             }
-            if(countryName.equalsIgnoreCase("aus")){
+            if (countryName.equalsIgnoreCase("aus")) {
                 country.setCountryName(CountryName.AUS);
                 country.setCode(CountryName.AUS.toCode());
             }
-            if(countryName.equalsIgnoreCase("chi")){
-                country.setCountryName(CountryName.CHI);
-                country.setCode(CountryName.CHI.toCode());
-            }
-            if(countryName.equalsIgnoreCase("jpn")){
+            if (countryName.equalsIgnoreCase("jpn")) {
                 country.setCountryName(CountryName.JPN);
                 country.setCode(CountryName.JPN.toCode());
             }
+            if (countryName.equalsIgnoreCase("chi")) {
+                country.setCountryName(CountryName.CHI);
+                country.setCode(CountryName.CHI.toCode());
+            }
+
             country.setUser(user);
             user.setOriginalCountry(country);
             user.setConnected(false);
-            user.setMaskedIp(null);
-            User user1=userRepository3.save(user);
-            String Ip=country.getCode()+"."+user1.getId();
-            user1.setOriginalIp(Ip);
-            user1=userRepository3.save(user);
-            return user1;
+
+            String IP = country.getCode() +"."+ userRepository3.save(user).getId();
+            user.setOriginalIp(IP);
+
+            userRepository3.save(user);
+            return user;
         }
-        else{
+        else
             throw new Exception("Country not found");
-        }
     }
 
     @Override
